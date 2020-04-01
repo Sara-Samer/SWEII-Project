@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
  */
 public class webService {
     
-    public ArrayList<UserModel> getList() throws SQLException, ClassNotFoundException{
+    public ArrayList<UserModel> getRegisteredUsers() throws SQLException, ClassNotFoundException{
         ArrayList<UserModel> allRecords = new ArrayList<>();
         Connection con = null;
         String query = "select * from userTable";
@@ -44,7 +44,7 @@ public class webService {
         
         return allRecords;
     }
-    public String register(String userName, String email, String password, String type) throws ClassNotFoundException, SQLException{        
+    public String registerUser(String userName, String email, String password, String type) throws ClassNotFoundException, SQLException{        
         if(!email.contains("@") || !email.endsWith(".com") || email.endsWith("@.com"))
             return "Invalid Email.";
         

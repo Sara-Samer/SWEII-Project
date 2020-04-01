@@ -27,11 +27,11 @@ import javax.ws.rs.core.MediaType;
 @Path("userController")
 public class UserController {
     @GET
-    @Path("/getlist")
+    @Path("/getRegisteredUsers")
     @Produces(MediaType.APPLICATION_JSON)
-    public ArrayList<UserModel> getList() throws SQLException, ClassNotFoundException{
+    public ArrayList<UserModel> getRegisteredUsers() throws SQLException, ClassNotFoundException{
         webService web = new webService();
-        return web.getList();
+        return web.getRegisteredUsers();
         
     }
     
@@ -40,12 +40,12 @@ public class UserController {
         ADMIN,SHOPOWNER, BUYER;
 }
     @GET
-    @Path("/register/{userName}/{email}/{password}/{type}")
+    @Path("/registerUser/{userName}/{email}/{password}/{type}")
     @Produces(MediaType.APPLICATION_JSON)
     public String registerUser(@PathParam("userName") String userName, @PathParam("email")String email, @PathParam("password")String password, @PathParam("type")int type) throws ClassNotFoundException, SQLException{
         webService web = new webService();
         if(type == 1 || type == 2)
-            return web.register(userName, email, password, userType.values()[type].toString());
+            return web.registerUser(userName, email, password, userType.values()[type].toString());
         else
             return "User type is Invalid";
     }
