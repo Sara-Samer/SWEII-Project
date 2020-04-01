@@ -21,9 +21,7 @@ import javax.ws.rs.core.MediaType;
  * @author lenovo
  */
 public class webService {
-    //@GET
-    //@Path("/getlist")
-    //@Produces(MediaType.APPLICATION_JSON)
+    
     public ArrayList<UserModel> getList() throws SQLException, ClassNotFoundException{
         ArrayList<UserModel> allRecords = new ArrayList<>();
         Connection con = null;
@@ -47,10 +45,22 @@ public class webService {
         return allRecords;
     }
     public String register(String userName, String email, String password, String type) throws ClassNotFoundException, SQLException{        
-
-        Connection con = null;
+        if(!email.contains("@") || !email.endsWith(".com") || email.endsWith("@.com"))
+            return "Invalid Email.";
         
-        String query = "INSERT INTO userTable(name,email,password,type) values ('" + userName+ "','" +email +"','"+password +"','" +type+"')";
+        Connection con = null;
+        String query = "select * from userTable where email = '" + email + "'";
+        
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
+        con = DriverManager.getConnection("jdbc:derby://localhost:1527/DB");
+        Statement st = con.createStatement();
+        ResultSet result = st.executeQuery(query);
+        
+        if(result.next()){
+            return "Email already Exists.";
+        }
+        
+        query = "INSERT INTO userTable(name,email,password,type) values ('" + userName+ "','" +email +"','"+password +"','" +type+"')";
         Class.forName("org.apache.derby.jdbc.ClientDriver");              
         con = DriverManager.getConnection("jdbc:derby://localhost:1527/DB");
         con.prepareStatement(query).execute();
