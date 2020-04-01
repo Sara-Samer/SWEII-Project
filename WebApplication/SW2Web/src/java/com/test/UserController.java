@@ -42,7 +42,7 @@ public class UserController {
     @GET
     @Path("/register/{userName}/{email}/{password}/{type}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String register(@PathParam("userName") String userName, @PathParam("email")String email, @PathParam("password")String password, @PathParam("type")int type) throws ClassNotFoundException, SQLException{
+    public String registerUser(@PathParam("userName") String userName, @PathParam("email")String email, @PathParam("password")String password, @PathParam("type")int type) throws ClassNotFoundException, SQLException{
         webService web = new webService();
         if(type == 1 || type == 2)
             return web.register(userName, email, password, userType.values()[type].toString());
