@@ -16,11 +16,6 @@ public class UsersController {
 	@RequestMapping("/get-user-list")
 	public List<User> getRegisteredUsers() {
 		List<User> userList = service.listAll();
-		String users = "";
-		users += userList.size();
-		for(User user: userList) {
-			users += "username; " + user.username + ", password: " + user.password + '\n';
-		}
 		return userList;
 	}
 	@RequestMapping("/register")

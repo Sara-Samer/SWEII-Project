@@ -11,20 +11,20 @@ import javax.persistence.Table;
  
 @Entity
 @Table(name = "user")
-public class User {
+abstract public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	public Long ID;
+	private Long ID;
 	@Column(name = "email", unique = true)
-    public String email;
+	private String email;
     @Column(name = "username", unique = true)
-    public String username;
+    private String username;
     @Column(name = "password")
-    public String password;
+    private String password;
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
-    public Type type;
+    private Type type;
  
     public User() {
     }
