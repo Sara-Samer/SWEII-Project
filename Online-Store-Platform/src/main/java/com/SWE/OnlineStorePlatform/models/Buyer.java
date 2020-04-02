@@ -5,11 +5,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class Owner extends User{
-	public Owner() {
+public class Buyer extends User{
+	public Buyer() {
 		
 	}
-	public Owner(String email, String username, String password, Type type) {
+	public Buyer(String email, String username, String password, Type type) {
 		super(email, username, password, type);
 	}
 }
