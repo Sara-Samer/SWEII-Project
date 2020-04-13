@@ -34,5 +34,15 @@ abstract public class User {
     	this.password = password;
     	this.type = type;
     }
+    public String getPassword() {
+    	return this.password;
+    }
+    public String getUsername() {
+    	return this.username;
+    }
+    public String getEmail() {
+    	return this.email;
+    }
+
 }
 
