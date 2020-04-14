@@ -20,7 +20,14 @@ public class UsersController {
 		return userList;
 	}
 
-	@RequestMapping("/register")
+	@RequestMapping("/get-user-email")
+	public List<User> getUserByEmail(HttpServletRequest request) {
+		String email = request.getParameter("email");
+		List<User> userList = service.getUserByEmail(email);
+		return userList;
+	}
+
+	@PostMapping("/register")
 	public Boolean registerUser(HttpServletRequest request) {
 		String emailPattern = "^([a-zA-Z0-9_\\.]+)@[a-zA-Z_]+?\\.[a-zA-Z]{2,4}$";
 		String usernamePattern = "[a-zA-Z0-9_\\-\\.]";

@@ -12,16 +12,28 @@ import com.SWE.OnlineStorePlatform.models.UserRepo;
 public class UserService {
 	@Autowired
 	private UserRepo repo;
-	public List<User> listAll(){
+
+	public List<User> listAll() {
 		return repo.findAll();
 	}
+
 	public void save(User user) {
 		repo.save(user);
 	}
+
+	public List<User> getUserByEmail(String email) {
+		return repo.findUserByEmail(email);
+	}
+
+	public List<User> getUserByEmail(int email) {
+		return null;
+	}
+
 	public User get(long id) {
 		return repo.findById(id).get();
 	}
+
 	public void delete(long id) {
-			repo.deleteById(id);
+		repo.deleteById(id);
 	}
 }
