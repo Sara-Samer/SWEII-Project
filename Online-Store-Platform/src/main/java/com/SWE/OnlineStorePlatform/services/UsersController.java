@@ -18,6 +18,7 @@ public class UsersController {
 
 	@Autowired
 	private UserService service;
+	@Autowired
 	private UserRepo repo;
 	@RequestMapping("/get-user-list")
 	public List<User> getRegisteredUsers() {
@@ -60,51 +61,19 @@ public class UsersController {
 		}
 			
 	}
-	
-//	@RequestMapping("/login_user")
-//	public Boolean loginUser(HttpServletRequest request) {
-//		return true;
-//	}
 
-//	@Query("SELECT u FROM user u WHERE u.email = ?1 or u.username = ?1")
-//    List<User> findByEmailOrUsername(String mail_username){
-//		return ;
-//	}
-	
 	@RequestMapping("/login")
 	public Boolean login(HttpServletRequest request) {
-		String email_username = request.getParameter("email_username");
+		String email_username = request.getParameter("email");
 		String pass = request.getParameter("password");
 		
-		List<User> users = repo.findAll();
-		for(User u : users) {
-			if(u.getPassword().equals(pass) && (u.getUsername().equals(email_username) || u.getEmail().equals(email_username)))
-				return true;
-		}
-		return false;
-		//return true;
+		User user = repo.findByEmailOrUserName(email_username);
 		
-		//User user = repo.findByEmailOrUserName(email_username);
-		//return true;
-		/*
-		//for(User u : user) {
+		if(user == null)
+			return false;//"User Doen't exist.\n";
 			if(user.getPassword().equals(pass))
 				return true;//"User loged in successfully.\n";
-		//}
 		return false;//"Wrong email or password, Please try again.\n";
-		
-		/*
-		List<User> user;
-		EntityManager entity = null;
-		return "hahaa";
-		/*String query = "select u from user where password = '"
-		+ pass + "' and (email = '" + email + "' or username = '"
-		+ email + "')";
-		user = (List<User>) entity.createQuery(query);
-		/*if(user.size() != 1)
-			return false;
-		return true;
-		*/
 		
 	}
 

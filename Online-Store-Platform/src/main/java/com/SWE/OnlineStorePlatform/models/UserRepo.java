@@ -22,7 +22,7 @@ public interface UserRepo extends JpaRepository<User, Long> {//CrudRepository<Us
 //    public User findByEmailOrUserName(String email);
 //	
 	
-//	@Query("SELECT p FROM User p WHERE p.username = :email_username OR p.email = :email_username")
-//	public User findByEmailOrUserName(@Param("email_username") String email_username);
+	@Query("SELECT p FROM User p WHERE p.username = :email_username OR p.email = :email_username")
+	public User findByEmailOrUserName(@Param("email_username") String email_username);
 //	
 }
