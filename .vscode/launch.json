@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-OnlineStorePlatformApplication<Online-Store-Platform>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.SWE.OnlineStorePlatform.OnlineStorePlatformApplication",
+            "projectName": "Online-Store-Platform",
+            "args": ""
+        }
+    ]
+}

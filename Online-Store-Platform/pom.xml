@@ -2,11 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-    <groupId>net.codejava</groupId>
-    <artifactId>ProductManager</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
- 
+    <groupId>com.SWE</groupId>
+	<artifactId>Online-Store-Platform</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Online-Store-Platform</name>
+	<description>Demo project for Spring Boot</description>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -14,6 +15,7 @@
     </parent>
  	<properties>
 		<java.version>14</java.version>
+        <!-- <exec.mainClass>com.SWE.OnlineStorePlatform.OnlineStorePlatformApplication</exec.mainClass> -->
 	</properties>
  	
     <dependencies>
@@ -57,6 +59,12 @@
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-starter-actuator</artifactId>
     	</dependency>
+    	<dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.0.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
      
     <build>
