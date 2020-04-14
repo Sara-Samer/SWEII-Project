@@ -1,4 +1,5 @@
 package com.SWE.OnlineStorePlatform.services;
+
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
@@ -7,22 +8,18 @@ import org.springframework.web.bind.annotation.*;
 
 import com.SWE.OnlineStorePlatform.models.*;
 
-
 @RestController
 public class UsersController {
 
 	@Autowired
 	private UserService service;
+
 	@RequestMapping("/get-user-list")
 	public List<User> getRegisteredUsers() {
 		List<User> userList = service.listAll();
-		String users = "";
-		users += userList.size();
-		for(User user: userList) {
-			users += "username; " + user.username + ", password: " + user.password + '\n';
-		}
 		return userList;
 	}
+
 	@RequestMapping("/register")
 	public Boolean registerUser(HttpServletRequest request) {
 		String emailPattern = "^([a-zA-Z0-9_\\.]+)@[a-zA-Z_]+?\\.[a-zA-Z]{2,4}$";
@@ -34,13 +31,13 @@ public class UsersController {
 		int type = Integer.parseInt(typeString);
 		User user;
 		boolean isValid = username.matches(usernamePattern) || email.matches(emailPattern);
-		
-		switch(type) {
-			case 0:{
+
+		switch (type) {
+			case 0: {
 				user = new Buyer(email, username, pass, Type.BUYER);
 				break;
 			}
-			case 1:{
+			case 1: {
 				user = new Owner(email, username, pass, Type.OWNER);
 				break;
 			}
@@ -48,13 +45,13 @@ public class UsersController {
 				user = null;
 				break;
 		}
-		
-		if(!isValid || user == null)
+
+		if (!isValid || user == null)
 			return false;
 		else {
 			service.save(user);
 			return true;
 		}
-			
+
 	}
 }
