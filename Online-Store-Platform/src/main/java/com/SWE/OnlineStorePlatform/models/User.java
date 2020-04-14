@@ -2,6 +2,8 @@ package com.SWE.OnlineStorePlatform.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,16 +11,20 @@ import javax.persistence.Table;
  
 @Entity
 @Table(name = "user")
-abstract public class User {
+public class User {
 	@Id
-	//@GeneratedValue(generator="ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Long ID;
-    private String email;
-    private String username;
-    private String password;
-    private Type type;
+	@Column(name = "id")
+	public Long ID;
+	@Column(name = "email", unique = true)
+    public String email;
+    @Column(name = "username", unique = true)
+    public String username;
+    @Column(name = "password")
+    public String password;
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    public Type type;
  
     public User() {
     }
