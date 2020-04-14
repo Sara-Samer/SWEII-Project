@@ -18,8 +18,6 @@ public class UsersController {
 
 	@Autowired
 	private UserService service;
-	@Autowired
-	private UserRepo repo;
 	@RequestMapping("/get-user-list")
 	public List<User> getRegisteredUsers() {
 		List<User> userList = service.listAll();
@@ -64,10 +62,10 @@ public class UsersController {
 
 	@RequestMapping("/login")
 	public Boolean login(HttpServletRequest request) {
-		String email_username = request.getParameter("email");
+		String email_username = request.getParameter("email_username");
 		String pass = request.getParameter("password");
 		
-		User user = repo.findByEmailOrUserName(email_username);
+		User user = service.checkUserLogin(email_username);
 		
 		if(user == null)
 			return false;//"User Doen't exist.\n";

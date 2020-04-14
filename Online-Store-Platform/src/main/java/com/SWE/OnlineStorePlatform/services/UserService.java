@@ -24,4 +24,7 @@ public class UserService {
 	public void delete(long id) {
 			repo.deleteById(id);
 	}
+	public User checkUserLogin(String email_username) {
+		return repo.findByEmailOrUserName(email_username);
+	}
 }

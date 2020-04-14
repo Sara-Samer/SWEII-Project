@@ -43,6 +43,9 @@ abstract public class User {
     public String getEmail() {
     	return this.email;
     }
+    public String getType() {
+    	return this.type.toString();
+    }
 
 }
 
