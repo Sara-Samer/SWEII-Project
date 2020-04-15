@@ -27,6 +27,14 @@ public class Token {
     @Enumerated(EnumType.STRING)
     private Type type;
 
+    public Token() {
+        this.key = 0;
+        this.token = "";
+        this.startDate = new Timestamp(0);
+        this.endDate = new Timestamp(0);
+        this.type = Type.BUYER;
+    }
+
     public Token(String userID, String password, int key) {
         this.key = key;
         this.token = this.generateToken(userID, password, key);
@@ -38,6 +46,7 @@ public class Token {
         cal.add(Calendar.MINUTE, 15);
         time = cal.getTime().getTime();
         this.endDate = new Timestamp(time);
+        this.type = Type.BUYER;
     }
 
     public String getToken() {
