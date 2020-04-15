@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import net.minidev.json.JSONObject;
 
 import com.SWE.OnlineStorePlatform.models.*;
+import com.SWE.OnlineStorePlatform.services.TokenService;
 import com.SWE.OnlineStorePlatform.services.UserService;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import net.minidev.json.JSONObject;
@@ -19,11 +20,13 @@ import net.minidev.json.JSONObject;
 public class UsersController {
 
 	@Autowired
-	private UserService service;
+	private UserService userService;
+	@Autowired
+	private TokenService tokenService;
 
 	@RequestMapping("/get-user-list")
 	public List<User> getRegisteredUsers() {
-		List<User> userList = service.listAll();
+		List<User> userList = userService.listAll();
 		return userList;
 	}
 
@@ -56,7 +59,7 @@ public class UsersController {
 		if (!isValid || user == null) {
 			return false;
 		} else {
-			service.save(user);
+			userService.save(user);
 			{
 				return true;
 			}
@@ -70,9 +73,9 @@ public class UsersController {
 		String email_username = request.getParameter("email_username");
 		String pass = request.getParameter("password");
 
-		User user = service.checkUserLogin(email_username);
+		User user = userService.checkUserLogin(email_username);
 		JSONObject json = new JSONObject();
-
+		Token loginToken = new Token(email_username, pass, 512);
 		if (user == null) {
 			json.put("response:", "User Not Found.");
 			return json;
@@ -85,14 +88,4 @@ public class UsersController {
 		return json;
 
 	}
-
-	private Token generateToken(String userID, String password) {
-		String token = userID + "-" + password;
-		int key = 512;
-		String generated = "";
-		for (int i = 0; i < (int) token.length(); ++i)
-			generated += (char) token.charAt(i) ^ key;
-		return new Token(generated, key);
-	}
-
 }
