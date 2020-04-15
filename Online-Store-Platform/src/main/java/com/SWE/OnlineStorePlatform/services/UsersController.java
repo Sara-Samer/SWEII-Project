@@ -72,34 +72,16 @@ public class UsersController {
 		String pass = request.getParameter("password");
 		
 		User user = service.checkUserLogin(email_username);
-		
 		HttpHeaders headers = new HttpHeaders();
-		//List<String> str = new ArrayList<String>();
-		//str.add("User Not Found.\n");
-	    //headers.put("error", str);
-	    headers.add("Content-Type", "application/json");
+		headers.add("Content-Type", "application/json");
 	    ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok().headers(headers);
+	    
 	    if(user == null)
-			return responseBuilder.build();//{return new ResponseEntity<>(headers, HttpStatus.OK);}//"User Doen't exist.\n";
-		if(user.getPassword().equals(pass))
-			return new ResponseEntity<User>(user, HttpStatus.OK);//"User loged in successfully.\n";
-		return responseBuilder.build();//body(new EmptyJsonBody());//{return new ResponseEntity<>(headers, HttpStatus.OK);}//"Wrong email or password, Please try again.\n";
-		
+			return responseBuilder.build();
+	    if(user.getPassword().equals(pass))
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+	    return responseBuilder.build();
+	
 	}
-	
-//	return new ResponseEntity<EmployeeVO>(employee, HttpStatus.OK);
-
-//return new ResponseEntity(HttpStatus.NOT_FOUND);
-	
-	/*@GetMapping("/login/{email_username},{password}")
-	public ResponseEntity<User> read(@PathVariable("email_username") String email_username, @PathVariable("password") String password) {
-	    User user = service.checkUserLogin(email_username);
-	    if (user == null) {
-	        return ResponseEntity.notFound().build();
-	    } else if(user.getPassword().equals(password)){
-	        return ResponseEntity.ok(user);
-	    }
-	    return ResponseEntity.badRequest().build();
-	}*/
 
 }
