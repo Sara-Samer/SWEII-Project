@@ -21,7 +21,7 @@ public class Token {
     private Timestamp startDate;
     @Column(name = "end_date")
     private Timestamp endDate;
-    @Column(name = "key")
+    @Column(name = "encryption_key")
     private int key;
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
