@@ -4,8 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.tomcat.util.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.http.HttpHeaders;
-//import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.SWE.OnlineStorePlatform.models.*;
@@ -65,42 +63,18 @@ public class UsersController {
 		String pass = request.getParameter("password");
 		
 		User user = service.checkUserLogin(email_username);
-		//HttpHeaders headers = new HttpHeaders();
-		//headers.add("Content-Type", "application/json");
-	    //ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok().headers(headers);
+		JSONObject json = new JSONObject();
 	    
-	    JSONObject json = new JSONObject();
-	    //json.put("ErrorMsg:", "hhhhh");
-	    
-	    //String str = "ll";
-	    
-	    //JSONParser parser = new JSONParser("hello");
-	    //JSONObject json = null;
-	    
-	    //json = (JSONObject) parser.parse();
-	    
-	    
-	    //String TEXT = " ll";
-	    //JSONObject body = JSONObject.createReader(new StringReader(TEXT)).readObject();
-	    if(user == null) {
+		if(user == null) {
 	    	json.put("response:", "User Not Found.");
 	    	return json;
 	    }
-	    	//return new JSONObject();
-	    	//Logger.info("User Not Found.");
-			//return responseBuilder.build();
 	    if(user.getPassword().equals(pass)) {
 	    	json.put("response:", "User Logged In Successfully.");
 	    	return json;
 	    }
-	    	//logger.info("User Logged In Successully.");
-			//return new ResponseEntity<User>(user, HttpStatus.OK);
-	   //return responseBuilder.build();
-	    json.put("response:", "Wrong Email or Password.");
+	    json.put("response:", "Wrong Password.");
 	    return json;
-	    //else
-	    	//logger.info("Wrong Password.");
-	   // return "{\"success\":1}";
 	    
 	}
 
