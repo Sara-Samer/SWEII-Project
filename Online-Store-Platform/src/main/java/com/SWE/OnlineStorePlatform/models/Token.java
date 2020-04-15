@@ -8,11 +8,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "login_token")
 public class Token {
+    @Id
     @Column(name = "token", unique = true)
     private String token;
     @Column(name = "start_date")
@@ -25,9 +27,9 @@ public class Token {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    public Token(String token, int key) {
+    public Token(String userID, String password, int key) {
         this.key = key;
-        this.token = token;
+        this.token = this.generateToken(userID, password, key);
         Date date = new Date();
         long time = date.getTime();
         this.startDate = new Timestamp(time);
@@ -40,6 +42,14 @@ public class Token {
 
     public String getToken() {
         return this.token;
+    }
+
+    private String generateToken(String userID, String password, int key) {
+        String token = userID + "-" + password;
+        String generated = "";
+        for (int i = 0; i < (int) token.length(); ++i)
+            generated += (char) token.charAt(i) ^ key;
+        return generated;
     }
 
 }
