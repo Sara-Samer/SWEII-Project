@@ -35,7 +35,7 @@ public class Token {
         this.type = Type.BUYER;
     }
 
-    public Token(String userID, String password, int key) {
+    public Token(String userID, String password, Character key) {
         this.key = key;
         this.token = this.generateToken(userID, password, key);
         Date date = new Date();
@@ -53,6 +53,14 @@ public class Token {
         return this.token;
     }
 
+    public Timestamp getStartDate() {
+        return this.startDate;
+    }
+
+    public Timestamp getEndDate() {
+        return this.endDate;
+    }
+
     public Boolean isValid() {
         Date date = new Date();
         long time = date.getTime();
@@ -60,7 +68,7 @@ public class Token {
         return (currentDate.after(this.startDate) && currentDate.before(this.endDate));
     }
 
-    private String generateToken(String userID, String password, int key) {
+    private String generateToken(String userID, String password, Character key) {
         String token = userID + "-" + password;
         String generated = "";
         for (int i = 0; i < (int) token.length(); ++i)
