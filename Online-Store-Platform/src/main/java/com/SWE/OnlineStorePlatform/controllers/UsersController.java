@@ -75,16 +75,28 @@ public class UsersController {
 
 		User user = userService.checkUserLogin(email_username);
 		JSONObject json = new JSONObject();
-		Token loginToken = new Token(email_username, pass, 512);
+		Token newLoginToken = new Token(email_username, pass, 512);
+		Token oldToken = tokenService.get(newLoginToken.getToken());
+		if (oldToken == null) {
+			tokenService.addToken(newLoginToken);
+		} else {
+			if (oldToken.isValid()) {
+				newLoginToken = oldToken;
+			} else {
+				tokenService.delete(oldToken.getToken());
+				tokenService.addToken(newLoginToken);
+			}
+		}
 		if (user == null) {
-			json.put("response:", "User Not Found.");
+			json.put("message:", "User Not Found.");
 			return json;
 		}
 		if (user.getPassword().equals(pass)) {
-			json.put("response:", "User Logged In Successfully.");
+			json.put("message:", "User Logged In Successfully.");
 			return json;
 		}
-		json.put("response:", "Wrong Password.");
+		json.put("message:", "Wrong Password.");
+		json.put("token:", newLoginToken);
 		return json;
 
 	}
