@@ -44,6 +44,13 @@ public class Token {
         return this.token;
     }
 
+    public Boolean isValid() {
+        Date date = new Date();
+        long time = date.getTime();
+        Timestamp currentDate = new Timestamp(time);
+        return (currentDate.after(this.startDate) && currentDate.before(this.endDate));
+    }
+
     private String generateToken(String userID, String password, int key) {
         String token = userID + "-" + password;
         String generated = "";
