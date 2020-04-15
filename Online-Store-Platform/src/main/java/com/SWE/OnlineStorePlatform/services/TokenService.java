@@ -17,7 +17,7 @@ public class TokenService {
         return repo.findAll();
     }
 
-    public void save(Token token) {
+    public void addToken(Token token) {
         repo.save(token);
     }
 
