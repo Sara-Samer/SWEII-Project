@@ -1,4 +1,4 @@
-package com.SWE.OnlineStorePlatform.services;
+package com.SWE.OnlineStorePlatform.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import net.minidev.json.JSONObject;
 
 import com.SWE.OnlineStorePlatform.models.*;
+import com.SWE.OnlineStorePlatform.services.UserService;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import net.minidev.json.JSONObject;
 

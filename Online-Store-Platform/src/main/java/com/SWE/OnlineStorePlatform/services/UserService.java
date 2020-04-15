@@ -5,25 +5,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.SWE.OnlineStorePlatform.models.User;
-import com.SWE.OnlineStorePlatform.models.UserRepo;
+import com.SWE.OnlineStorePlatform.repositories.UserRepo;
 
 @Service
 @Transactional
 public class UserService {
 	@Autowired
 	private UserRepo repo;
-	public List<User> listAll(){
+
+	public List<User> listAll() {
 		return repo.findAll();
 	}
+
 	public void save(User user) {
 		repo.save(user);
 	}
+
 	public User get(long id) {
 		return repo.findById(id).get();
 	}
+
 	public void delete(long id) {
-			repo.deleteById(id);
+		repo.deleteById(id);
 	}
+
 	public User checkUserLogin(String email_username) {
 		return repo.findByEmailOrUserName(email_username);
 	}
