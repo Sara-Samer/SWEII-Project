@@ -1,22 +1,15 @@
 package com.SWE.OnlineStorePlatform.services;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+//import org.springframework.http.HttpHeaders;
+//import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.SWE.OnlineStorePlatform.models.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
+import net.minidev.json.JSONObject;
 
 @RestController
 public class UsersController {
@@ -67,21 +60,48 @@ public class UsersController {
 
 	@RequestMapping("/login")
 	@ResponseBody
-	public ResponseEntity<User> login(HttpServletRequest request) {
+	public JSONObject login(HttpServletRequest request) throws ParseException {
 		String email_username = request.getParameter("email_username");
 		String pass = request.getParameter("password");
 		
 		User user = service.checkUserLogin(email_username);
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json");
-	    ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok().headers(headers);
+		//HttpHeaders headers = new HttpHeaders();
+		//headers.add("Content-Type", "application/json");
+	    //ResponseEntity.BodyBuilder responseBuilder = ResponseEntity.ok().headers(headers);
 	    
-	    if(user == null)
-			return responseBuilder.build();
-	    if(user.getPassword().equals(pass))
-			return new ResponseEntity<User>(user, HttpStatus.OK);
-	    return responseBuilder.build();
-	
+	    JSONObject json = new JSONObject();
+	    //json.put("ErrorMsg:", "hhhhh");
+	    
+	    //String str = "ll";
+	    
+	    //JSONParser parser = new JSONParser("hello");
+	    //JSONObject json = null;
+	    
+	    //json = (JSONObject) parser.parse();
+	    
+	    
+	    //String TEXT = " ll";
+	    //JSONObject body = JSONObject.createReader(new StringReader(TEXT)).readObject();
+	    if(user == null) {
+	    	json.put("response:", "User Not Found.");
+	    	return json;
+	    }
+	    	//return new JSONObject();
+	    	//Logger.info("User Not Found.");
+			//return responseBuilder.build();
+	    if(user.getPassword().equals(pass)) {
+	    	json.put("response:", "User Logged In Successfully.");
+	    	return json;
+	    }
+	    	//logger.info("User Logged In Successully.");
+			//return new ResponseEntity<User>(user, HttpStatus.OK);
+	   //return responseBuilder.build();
+	    json.put("response:", "Wrong Email or Password.");
+	    return json;
+	    //else
+	    	//logger.info("Wrong Password.");
+	   // return "{\"success\":1}";
+	    
 	}
 
 }
