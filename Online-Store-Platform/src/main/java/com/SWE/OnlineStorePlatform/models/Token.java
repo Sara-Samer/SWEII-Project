@@ -35,7 +35,7 @@ public class Token {
         this.type = Type.BUYER;
     }
 
-    public Token(String userID, String password, Character key) {
+    public Token(String userID, String password, Character key, Type type) {
         this.key = key;
         this.token = this.generateToken(userID, password, key);
         Date date = new Date();
@@ -46,7 +46,7 @@ public class Token {
         cal.add(Calendar.MINUTE, 15);
         time = cal.getTime().getTime();
         this.endDate = new Timestamp(time);
-        this.type = Type.BUYER;
+        this.type = type;
     }
 
     public String getToken() {

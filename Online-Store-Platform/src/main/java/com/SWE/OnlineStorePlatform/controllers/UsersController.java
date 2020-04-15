@@ -75,7 +75,7 @@ public class UsersController {
 
 		User user = userService.checkUserLogin(email_username);
 		JSONObject json = new JSONObject();
-		Token newLoginToken = new Token(email_username, pass, 'S');
+		Token newLoginToken = new Token(email_username, pass, 'S', user.getEnumType());
 		Token oldToken = tokenService.get(newLoginToken.getToken());
 		if (oldToken == null) {
 			tokenService.addToken(newLoginToken);

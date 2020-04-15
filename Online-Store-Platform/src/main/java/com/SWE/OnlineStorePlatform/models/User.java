@@ -8,16 +8,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
- 
+
 @Entity
 @Table(name = "user")
 abstract public class User {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long ID;
-	@Column(name = "email", unique = true)
-	private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long ID;
+    @Column(name = "email", unique = true)
+    private String email;
     @Column(name = "username", unique = true)
     private String username;
     @Column(name = "password")
@@ -25,27 +25,35 @@ abstract public class User {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private Type type;
- 
+
     public User() {
     }
+
     public User(String email, String username, String password, Type type) {
-    	this.email = email;
-    	this.username = username;
-    	this.password = password;
-    	this.type = type;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.type = type;
     }
+
     public String getPassword() {
-    	return this.password;
+        return this.password;
     }
+
     public String getUsername() {
-    	return this.username;
+        return this.username;
     }
+
     public String getEmail() {
-    	return this.email;
+        return this.email;
     }
+
     public String getType() {
-    	return this.type.toString();
+        return this.type.toString();
+    }
+
+    public Type getEnumType() {
+        return this.type;
     }
 
 }
-
