@@ -20,15 +20,9 @@ import net.minidev.json.JSONObject;
 public class UsersController {
 
 	@Autowired
-	private UserService userService;
+	protected UserService userService;
 	@Autowired
-	private TokenService tokenService;
-
-	@RequestMapping("/get-user-list")
-	public List<User> getRegisteredUsers() {
-		List<User> userList = userService.listAll();
-		return userList;
-	}
+	protected TokenService tokenService;
 
 	@RequestMapping("/register")
 	public Boolean registerUser(HttpServletRequest request) {
