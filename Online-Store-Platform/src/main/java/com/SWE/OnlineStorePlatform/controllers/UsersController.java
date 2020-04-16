@@ -23,7 +23,7 @@ import net.minidev.json.JSONObject;
 public class UsersController {
 
 	@Autowired
-	private UserService userService;
+	protected UserService userService;
 	@Autowired
 	private TokenService tokenService;
 

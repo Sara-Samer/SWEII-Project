@@ -28,6 +28,7 @@ public class AdminController {
             return json;
         }
         json.put("message:", "Can't process Request.");
+        json.put("data:", null);
         return json;
     }
 
