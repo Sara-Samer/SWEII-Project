@@ -61,6 +61,10 @@ public class Token {
         return this.endDate;
     }
 
+    public Type getType() {
+        return this.type;
+    }
+
     public Boolean isValid() {
         Date date = new Date();
         long time = date.getTime();
